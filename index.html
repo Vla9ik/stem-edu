@@ -5,30 +5,63 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="shortcut icon" href="./assets/img/favicon.ico">
 		<title>Home Page</title>
-		<script type="module" crossorigin="" src="./js/index.min.js?v=1747160136853"></script>
-		<link rel="stylesheet" crossorigin="" href="./css/index.min.css?v=1747160136853">
+		<script type="module" crossorigin="" src="./js/index.min.js?v=1747173419798"></script>
+		<link rel="stylesheet" crossorigin="" href="./css/index.min.css?v=1747173419798">
 	</head>
 	<body>
 		<div class="wrapper">
 			<header data-fls-header="" class="header">
 				<div class="header__container">
-					<!-- <include src="@components/layout/menu/menu.html" locals='{"active":"Home"}'></include> -->
+					<a href="#" class="header__logo">
+						<img src="./assets/img/logo.svg" alt="logo">
+					</a>
+					<div class="header__menu menu">
+						<button type="button" data-fls-menu="" class="menu__icon icon-menu">
+							<span></span>
+						</button>
+						<nav class="menu__body">
+							<ul class="menu__list">
+								<li>
+									<a href="#">
+										<span>Хто ми</span>
+										<img src="./assets/img/icons/arrow.svg" alt="arrow">
+									</a>
+									<ul class="menu__sublist">
+										<li>
+											<a href="#">Про нас</a>
+										</li>
+										<li>
+											<a href="#">Команда</a>
+										</li>
+										<li>
+											<a href="#">Наші партнери</a>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<a href="#">Наша діяльність</a>
+								</li>
+								<li>
+									<a href="#">Анонси</a>
+								</li>
+								<li>
+									<a href="#">Контакти</a>
+								</li>
+							</ul>
+							<div class="menu__socials">
+								<button>Підтримати нас</button>
+								<a href="#" class="facebook icon-fb"></a>
+								<a href="#" class="instagram icon-inst"></a>
+							</div>
+							<div class="menu__languages">
+								<a class="menu__language active" href="#">ua</a>
+								<a class="menu__language" href="#">en</a>
+							</div>
+						</nav>
+					</div>
 				</div>
 			</header>
-			<main class="page page--home">
-				<div class="test__container">
-					<ul>
-						<li>item 1</li>
-						<li>item 2</li>
-						<li>item 3</li>
-						<li>item 4</li>
-						<li>item 5</li>
-					</ul>
-					<section class="container">
-						Lorem ipsum dolor sit, amet consectetur adipisicing elit. Perspiciatis eum, at dicta tempore provident eos minima? Cum, expedita reiciendis quia libero quidem sequi unde ex excepturi fugit hic dolorem illo!
-					</section>
-				</div>
-			</main>
+			<main class="page page--home"></main>
 			<footer data-fls-footer="" class="footer">
 				<div class="footer__container"></div>
 			</footer>
