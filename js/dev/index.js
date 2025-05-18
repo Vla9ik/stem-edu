@@ -10851,11 +10851,11 @@ var ScrollTrigger = /* @__PURE__ */ function() {
         _root = [_win, _doc, _docEl, _body];
         if (gsap$1.matchMedia) {
           ScrollTrigger2.matchMedia = function(vars) {
-            var mm = gsap$1.matchMedia(), p;
+            var mm2 = gsap$1.matchMedia(), p;
             for (p in vars) {
-              mm.add(p, vars[p]);
+              mm2.add(p, vars[p]);
             }
-            return mm;
+            return mm2;
           };
           gsap$1.addEventListener("matchMediaInit", function() {
             return _revertAll();
@@ -11680,6 +11680,97 @@ if (!mq.matches) {
 }
 gsapWithCSS.registerPlugin(ScrollTrigger);
 gsapWithCSS.registerPlugin(SplitText);
+let mm = gsapWithCSS.matchMedia();
+mm.add("(min-width: 1024px)", () => {
+  gsapWithCSS.fromTo(".header__logo", {
+    y: -10,
+    opacity: 0
+  }, {
+    y: 0,
+    opacity: 1,
+    // duration: 0.5, 
+    delay: 0.8,
+    duration: 1
+  });
+  gsapWithCSS.fromTo(".menu__list li", {
+    y: -10,
+    opacity: 0
+  }, {
+    y: 0,
+    opacity: 1,
+    stagger: 0.05,
+    // duration: 1,
+    delay: 1
+  });
+  gsapWithCSS.fromTo(".menu__socials", {
+    opacity: 0,
+    y: -10
+  }, {
+    opacity: 1,
+    y: 0,
+    // duration: 0.2,
+    duration: 1,
+    delay: 1.5
+  });
+  gsapWithCSS.fromTo(".menu__languages", {
+    y: -10,
+    opacity: 0
+  }, {
+    y: 0,
+    opacity: 1,
+    duration: 1,
+    delay: 1.5
+  });
+  gsapWithCSS.fromTo(".menu__languages a", {
+    y: -10,
+    opacity: 0
+  }, {
+    y: 0,
+    opacity: 1,
+    stagger: 0.15,
+    delay: 1.5
+    // duration: 0.2,
+  });
+  gsapWithCSS.fromTo(".presentation__container", {
+    scale: 0,
+    opacity: 0
+  }, {
+    scrollTrigger: {
+      trigger: ".presentation",
+      start: "top center"
+    },
+    scale: 1,
+    opacity: 1,
+    delay: 1.2,
+    duration: 0.9
+  });
+  gsapWithCSS.fromTo(".presentation__title", {
+    y: 50,
+    opacity: 0
+  }, {
+    scrollTrigger: {
+      trigger: ".presentation",
+      start: "top center"
+    },
+    y: 0,
+    opacity: 1,
+    duration: 1,
+    delay: 1.8
+  });
+  gsapWithCSS.fromTo(".presentation__dekstop", {
+    opacity: 0
+  }, {
+    scrollTrigger: {
+      trigger: ".presentation",
+      start: "top center"
+    },
+    opacity: 1,
+    duration: 1.2,
+    delay: 1.8
+  });
+});
+mm.add("(max-width: 1024px)", () => {
+});
 gsapWithCSS.fromTo("header", {
   scale: 0,
   opacity: 0
@@ -11689,126 +11780,46 @@ gsapWithCSS.fromTo("header", {
   // delay: 0.5, 
   duration: 1
 });
-gsapWithCSS.fromTo(".header__logo", {
-  y: -10,
-  opacity: 0
-}, {
-  y: 0,
-  opacity: 1,
-  // duration: 0.5, 
-  delay: 0.8,
-  duration: 1
-});
-gsapWithCSS.fromTo(".menu__list li", {
-  y: -10,
-  opacity: 0
-}, {
-  y: 0,
-  opacity: 1,
-  stagger: 0.05,
-  // duration: 1,
-  delay: 1
-});
-gsapWithCSS.fromTo(".menu__socials", {
-  opacity: 0,
-  y: -10
-}, {
-  opacity: 1,
-  y: 0,
-  // duration: 0.2,
-  duration: 1,
-  delay: 1.5
-});
-gsapWithCSS.fromTo(".menu__languages", {
-  y: -10,
-  opacity: 0
-}, {
-  y: 0,
-  opacity: 1,
-  duration: 1,
-  delay: 1.5
-});
-gsapWithCSS.fromTo(".menu__languages a", {
-  y: -10,
-  opacity: 0
-}, {
-  y: 0,
-  opacity: 1,
-  stagger: 0.15,
-  delay: 1.5
-  // duration: 0.2,
-});
-gsapWithCSS.fromTo(".presentation__container", {
-  scale: 0,
-  opacity: 0
-}, {
-  scrollTrigger: {
-    trigger: ".presentation",
-    start: "top center"
-  },
-  scale: 1,
-  opacity: 1,
-  delay: 1.2,
-  duration: 0.9
-});
-gsapWithCSS.fromTo(".presentation__title", {
+gsapWithCSS.fromTo(".cooperation__title", {
   y: 50,
   opacity: 0
 }, {
   scrollTrigger: {
-    trigger: ".presentation",
-    start: "top center"
-  },
-  y: 0,
-  opacity: 1,
-  duration: 1,
-  delay: 1.8
-});
-gsapWithCSS.fromTo(".presentation__dekstop", {
-  opacity: 0
-}, {
-  scrollTrigger: {
-    trigger: ".presentation",
-    start: "top center"
-  },
-  opacity: 1,
-  duration: 1.2,
-  delay: 1.8
-});
-gsapWithCSS.fromTo(".cooperation__title", {
-  y: 30,
-  opacity: 0
-}, {
-  scrollTrigger: {
     trigger: ".cooperation",
     start: "top center"
   },
   y: 0,
   opacity: 1,
-  duration: 0.5
+  duration: 0.6
   // delay: 1, 
 });
-gsapWithCSS.fromTo(".cooperation__item", {
-  y: 30,
-  opacity: 0
-}, {
-  scrollTrigger: {
-    trigger: ".cooperation",
-    start: "top center"
-  },
-  y: 0,
-  opacity: 1,
-  // duration: 0.5,
-  stagger: 0.15
-  // delay: 1, 
+gsapWithCSS.utils.toArray(".cooperation__item").forEach((item, index) => {
+  gsapWithCSS.fromTo(
+    item,
+    {
+      y: 50,
+      opacity: 0
+    },
+    {
+      scrollTrigger: {
+        trigger: item,
+        start: "top-=150px center"
+      },
+      y: 0,
+      opacity: 1,
+      duration: 0.6,
+      delay: index * 0.2,
+      ease: "power2.out"
+    }
+  );
 });
 gsapWithCSS.fromTo(".cooperation__all", {
   y: 30,
   opacity: 0
 }, {
   scrollTrigger: {
-    trigger: ".cooperation",
-    start: "top+=100px center"
+    trigger: ".cooperation__all",
+    start: "top-=100px center"
   },
   y: 0,
   opacity: 1,
@@ -11820,6 +11831,8 @@ const chars = splitter.words;
 gsapWithCSS.from(chars, {
   scrollTrigger: {
     trigger: ".equity",
+    // trigger: chars,    
+    // markers:true, 
     start: "top center",
     once: true
   },
@@ -11842,33 +11855,45 @@ gsapWithCSS.fromTo(".equity__image", {
   duration: 1
   // delay: 1, 
 });
-gsapWithCSS.fromTo(".statistics__items .statistics__item", {
-  y: 50,
-  opacity: 0
-}, {
-  scrollTrigger: {
-    trigger: ".statistics",
-    start: "top center"
-  },
-  y: 0,
-  opacity: 1,
-  // duration: 0.5,
-  stagger: 0.25
-  // delay: 1, 
+gsapWithCSS.utils.toArray(".statistics__items .statistics__item").forEach((item, index) => {
+  gsapWithCSS.fromTo(
+    item,
+    {
+      y: 50,
+      opacity: 0
+    },
+    {
+      scrollTrigger: {
+        trigger: item,
+        start: "top-=150px center"
+      },
+      y: 0,
+      opacity: 1,
+      duration: 0.6,
+      delay: index * 0.2,
+      ease: "power2.out"
+    }
+  );
 });
-gsapWithCSS.fromTo(".statistics__info-items .statistics__item", {
-  y: 50,
-  opacity: 0
-}, {
-  scrollTrigger: {
-    trigger: ".statistics",
-    start: "center center"
-  },
-  y: 0,
-  opacity: 1,
-  // duration: 0.5,
-  stagger: 0.25
-  // delay: 1, 
+gsapWithCSS.utils.toArray(".statistics__info-items .statistics__item").forEach((item, index) => {
+  gsapWithCSS.fromTo(
+    item,
+    {
+      y: 50,
+      opacity: 0
+    },
+    {
+      scrollTrigger: {
+        trigger: item,
+        start: "top-=150px center"
+      },
+      y: 0,
+      opacity: 1,
+      duration: 0.6,
+      delay: index * 0.2,
+      ease: "power2.out"
+    }
+  );
 });
 const splitterFocus = new SplitText(".focus__title", { type: "words" });
 const charsFocus = splitterFocus.words;
