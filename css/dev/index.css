@@ -1118,6 +1118,13 @@ body {
     bottom: 30%;
     transform: rotate(45deg);
   }
+  .header {
+    top: -100%;
+    transition: all 0.6s;
+  }
+  [data-fls-loaded] .header {
+    top: 0;
+  }
   .header__container {
     width: calc(100% - 1.875rem);
     overflow-x: hidden;

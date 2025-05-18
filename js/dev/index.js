@@ -11682,6 +11682,15 @@ gsapWithCSS.registerPlugin(ScrollTrigger);
 gsapWithCSS.registerPlugin(SplitText);
 let mm = gsapWithCSS.matchMedia();
 mm.add("(min-width: 1024px)", () => {
+  gsapWithCSS.fromTo("header", {
+    scale: 0,
+    opacity: 0
+  }, {
+    scale: 1,
+    opacity: 1,
+    // delay: 0.5, 
+    duration: 1
+  });
   gsapWithCSS.fromTo(".header__logo", {
     y: -10,
     opacity: 0
@@ -11731,32 +11740,6 @@ mm.add("(min-width: 1024px)", () => {
     delay: 1.5
     // duration: 0.2,
   });
-  gsapWithCSS.fromTo(".presentation__container", {
-    scale: 0,
-    opacity: 0
-  }, {
-    scrollTrigger: {
-      trigger: ".presentation",
-      start: "top center"
-    },
-    scale: 1,
-    opacity: 1,
-    delay: 1.2,
-    duration: 0.9
-  });
-  gsapWithCSS.fromTo(".presentation__title", {
-    y: 50,
-    opacity: 0
-  }, {
-    scrollTrigger: {
-      trigger: ".presentation",
-      start: "top center"
-    },
-    y: 0,
-    opacity: 1,
-    duration: 1,
-    delay: 1.8
-  });
   gsapWithCSS.fromTo(".presentation__dekstop", {
     opacity: 0
   }, {
@@ -11771,14 +11754,31 @@ mm.add("(min-width: 1024px)", () => {
 });
 mm.add("(max-width: 1024px)", () => {
 });
-gsapWithCSS.fromTo("header", {
+gsapWithCSS.fromTo(".presentation__container", {
   scale: 0,
   opacity: 0
 }, {
+  scrollTrigger: {
+    trigger: ".presentation",
+    start: "top center"
+  },
   scale: 1,
   opacity: 1,
-  // delay: 0.5, 
-  duration: 1
+  delay: 1.2,
+  duration: 0.9
+});
+gsapWithCSS.fromTo(".presentation__title", {
+  y: 50,
+  opacity: 0
+}, {
+  scrollTrigger: {
+    trigger: ".presentation",
+    start: "top center"
+  },
+  y: 0,
+  opacity: 1,
+  duration: 1,
+  delay: 1.8
 });
 gsapWithCSS.fromTo(".cooperation__title", {
   y: 50,
@@ -11981,3 +11981,13 @@ gsapWithCSS.fromTo(".partners__container", {
   duration: 0.7
   // delay: 1, 
 });
+function addLoadedClass() {
+  if (!document.documentElement.hasAttribute("data-fls-preloader-loading")) {
+    window.addEventListener("load", function() {
+      setTimeout(function() {
+        document.documentElement.setAttribute("data-fls-loaded", "");
+      }, 0);
+    });
+  }
+}
+addLoadedClass();
