@@ -11701,7 +11701,7 @@ mm.add("(min-width: 1024px)", () => {
     delay: 0.8,
     duration: 1
   });
-  gsapWithCSS.fromTo(".menu__list li", {
+  gsapWithCSS.fromTo(".menu__list > li", {
     y: -10,
     opacity: 0
   }, {
