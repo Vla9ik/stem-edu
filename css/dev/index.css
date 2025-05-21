@@ -1151,6 +1151,7 @@ body {
     top: 0;
   }
   .header__container {
+    box-shadow: 0 0 0.125rem rgba(0, 0, 0, 0.2);
     width: calc(100% - 1.875rem);
     overflow-x: hidden;
     border-radius: 2.5rem;
