@@ -11651,7 +11651,7 @@ document.addEventListener("click", (e) => {
   const btn = e.target.closest("[data-spoller]");
   if (!btn) return;
   e.preventDefault();
-  const box = document.querySelector(btn.dataset.spollerTarget);
+  const box = btn.nextElementSibling;
   if (!box) return;
   if (box.classList.contains("--open")) {
     box.style.maxHeight = null;
@@ -11666,7 +11666,7 @@ document.addEventListener("click", (e) => {
 mq.addEventListener("change", (e) => {
   if (!e.matches) {
     document.querySelectorAll("[data-spoller]").forEach((btn) => {
-      const box = document.querySelector(btn.dataset.spollerTarget);
+      const box = btn.nextElementSibling;
       if (box) {
         box.style.maxHeight = null;
         box.classList.remove("--open");
@@ -11979,6 +11979,60 @@ gsapWithCSS.fromTo(".partners__container", {
   y: 0,
   opacity: 1,
   duration: 0.7
+  // delay: 1, 
+});
+gsapWithCSS.fromTo(".contact__title", {
+  y: 50,
+  opacity: 0
+}, {
+  scrollTrigger: {
+    trigger: ".contact",
+    start: "top center"
+  },
+  y: 0,
+  opacity: 1,
+  duration: 1
+  // delay: 1, 
+});
+gsapWithCSS.fromTo(".contact__description", {
+  y: 80,
+  opacity: 0
+}, {
+  scrollTrigger: {
+    trigger: ".contact",
+    start: "top+=100 center"
+  },
+  y: 0,
+  opacity: 1,
+  duration: 1
+  // delay: 1, 
+});
+gsapWithCSS.fromTo(".contact__communication", {
+  y: 80,
+  opacity: 0
+}, {
+  scrollTrigger: {
+    trigger: ".contact",
+    start: "top+=100 center"
+  },
+  y: 0,
+  stagger: 0.15,
+  opacity: 1,
+  duration: 1.3
+  // delay: 1, 
+});
+gsapWithCSS.fromTo(".contact__form > *", {
+  y: 50,
+  opacity: 0
+}, {
+  scrollTrigger: {
+    trigger: ".contact",
+    start: "top+=100 center"
+  },
+  y: 0,
+  stagger: 0.1,
+  opacity: 1,
+  duration: 1.3
   // delay: 1, 
 });
 function addLoadedClass() {
