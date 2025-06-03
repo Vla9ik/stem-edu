@@ -7405,7 +7405,7 @@ gsapWithCSS.fromTo(".info-project__period > *", {
 }, {
   scrollTrigger: {
     trigger: ".info-project",
-    start: "top center"
+    start: "center center"
   },
   y: 0,
   opacity: 1,
@@ -7419,7 +7419,7 @@ gsapWithCSS.fromTo(".info-project__about > *", {
 }, {
   scrollTrigger: {
     trigger: ".info-project",
-    start: "top center"
+    start: "center center"
   },
   y: 0,
   opacity: 1,
@@ -7433,7 +7433,7 @@ gsapWithCSS.fromTo(".info-project__partners > *", {
 }, {
   scrollTrigger: {
     trigger: ".info-project",
-    start: "top center"
+    start: "center center"
   },
   y: 0,
   opacity: 1,
@@ -7484,7 +7484,7 @@ gsapWithCSS.utils.toArray(".info-block__text > *").forEach((item, index) => {
     {
       scrollTrigger: {
         trigger: item,
-        start: "top-=150px center"
+        start: "top-=250px center"
       },
       y: 0,
       opacity: 1,
@@ -7537,11 +7537,11 @@ gsapWithCSS.utils.toArray(".about-us__article").forEach((item, index) => {
     {
       scrollTrigger: {
         trigger: item,
-        start: "top-=250px center"
+        start: "top-=300px center"
       },
       y: 0,
       opacity: 1,
-      duration: 0.6,
+      duration: 0.35,
       delay: index * 0.2,
       ease: "power2.out"
     }
