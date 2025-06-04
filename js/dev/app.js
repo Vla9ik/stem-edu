@@ -7460,7 +7460,7 @@ gsapWithCSS$1.fromTo(".info-project__period > *", {
 }, {
   scrollTrigger: {
     trigger: ".info-project",
-    start: "center center"
+    start: "top center"
   },
   y: 0,
   opacity: 1,
@@ -7474,7 +7474,7 @@ gsapWithCSS$1.fromTo(".info-project__about > *", {
 }, {
   scrollTrigger: {
     trigger: ".info-project",
-    start: "center center"
+    start: "top center"
   },
   y: 0,
   opacity: 1,
@@ -7488,7 +7488,7 @@ gsapWithCSS$1.fromTo(".info-project__partners > *", {
 }, {
   scrollTrigger: {
     trigger: ".info-project",
-    start: "center center"
+    start: "top center"
   },
   y: 0,
   opacity: 1,
