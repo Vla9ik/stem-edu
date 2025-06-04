@@ -35,6 +35,81 @@
     fetch(link.href, fetchOpts);
   }
 })();
+function getHash() {
+  if (location.hash) {
+    return location.hash.replace("#", "");
+  }
+}
+function setHash(hash) {
+  hash = hash ? `#${hash}` : window.location.href.split("#")[0];
+  history.pushState("", "", hash);
+}
+let slideUp = (target, duration = 500, showmore = 0) => {
+  if (!target.classList.contains("--slide")) {
+    target.classList.add("--slide");
+    target.style.transitionProperty = "height, margin, padding";
+    target.style.transitionDuration = duration + "ms";
+    target.style.height = `${target.offsetHeight}px`;
+    target.offsetHeight;
+    target.style.overflow = "hidden";
+    target.style.height = showmore ? `${showmore}px` : `0px`;
+    target.style.paddingTop = 0;
+    target.style.paddingBottom = 0;
+    target.style.marginTop = 0;
+    target.style.marginBottom = 0;
+    window.setTimeout(() => {
+      target.hidden = !showmore ? true : false;
+      !showmore ? target.style.removeProperty("height") : null;
+      target.style.removeProperty("padding-top");
+      target.style.removeProperty("padding-bottom");
+      target.style.removeProperty("margin-top");
+      target.style.removeProperty("margin-bottom");
+      !showmore ? target.style.removeProperty("overflow") : null;
+      target.style.removeProperty("transition-duration");
+      target.style.removeProperty("transition-property");
+      target.classList.remove("--slide");
+      document.dispatchEvent(new CustomEvent("slideUpDone", {
+        detail: {
+          target
+        }
+      }));
+    }, duration);
+  }
+};
+let slideDown = (target, duration = 500, showmore = 0) => {
+  if (!target.classList.contains("--slide")) {
+    target.classList.add("--slide");
+    target.hidden = target.hidden ? false : null;
+    showmore ? target.style.removeProperty("height") : null;
+    let height = target.offsetHeight;
+    target.style.overflow = "hidden";
+    target.style.height = showmore ? `${showmore}px` : `0px`;
+    target.style.paddingTop = 0;
+    target.style.paddingBottom = 0;
+    target.style.marginTop = 0;
+    target.style.marginBottom = 0;
+    target.offsetHeight;
+    target.style.transitionProperty = "height, margin, padding";
+    target.style.transitionDuration = duration + "ms";
+    target.style.height = height + "px";
+    target.style.removeProperty("padding-top");
+    target.style.removeProperty("padding-bottom");
+    target.style.removeProperty("margin-top");
+    target.style.removeProperty("margin-bottom");
+    window.setTimeout(() => {
+      target.style.removeProperty("height");
+      target.style.removeProperty("overflow");
+      target.style.removeProperty("transition-duration");
+      target.style.removeProperty("transition-property");
+      target.classList.remove("--slide");
+      document.dispatchEvent(new CustomEvent("slideDownDone", {
+        detail: {
+          target
+        }
+      }));
+    }, duration);
+  }
+};
 let bodyLockStatus = true;
 let bodyLockToggle = (delay = 500) => {
   if (document.documentElement.hasAttribute("data-fls-scrolllock")) {
@@ -6902,8 +6977,8 @@ const _SplitText = class _SplitText2 {
 };
 _SplitText.version = "3.13.0";
 let SplitText = _SplitText;
-var gsapWithCSS = gsap$3.registerPlugin(CSSPlugin) || gsap$3;
-gsapWithCSS.core.Tween;
+var gsapWithCSS$1 = gsap$3.registerPlugin(CSSPlugin) || gsap$3;
+gsapWithCSS$1.core.Tween;
 const desktopMq = window.matchMedia("(min-width: 1025px)");
 let handlers = [];
 function enableSubmenu() {
@@ -6976,11 +7051,11 @@ mq.addEventListener("change", (e) => {
 if (!mq.matches) {
   mq.dispatchEvent(new Event("change"));
 }
-gsapWithCSS.registerPlugin(ScrollTrigger);
-gsapWithCSS.registerPlugin(SplitText);
-let mm = gsapWithCSS.matchMedia();
+gsapWithCSS$1.registerPlugin(ScrollTrigger);
+gsapWithCSS$1.registerPlugin(SplitText);
+let mm = gsapWithCSS$1.matchMedia();
 mm.add("(min-width: 1024px)", () => {
-  gsapWithCSS.fromTo("header", {
+  gsapWithCSS$1.fromTo("header", {
     scale: 0,
     opacity: 0
   }, {
@@ -6989,7 +7064,7 @@ mm.add("(min-width: 1024px)", () => {
     // delay: 0.5, 
     duration: 1
   });
-  gsapWithCSS.fromTo(".header__logo", {
+  gsapWithCSS$1.fromTo(".header__logo", {
     y: -10,
     opacity: 0
   }, {
@@ -6999,7 +7074,7 @@ mm.add("(min-width: 1024px)", () => {
     delay: 0.8,
     duration: 1
   });
-  gsapWithCSS.fromTo(".menu__list > li", {
+  gsapWithCSS$1.fromTo(".menu__list > li", {
     y: -10,
     opacity: 0
   }, {
@@ -7009,7 +7084,7 @@ mm.add("(min-width: 1024px)", () => {
     // duration: 1,
     delay: 1
   });
-  gsapWithCSS.fromTo(".menu__socials", {
+  gsapWithCSS$1.fromTo(".menu__socials", {
     opacity: 0,
     y: -10
   }, {
@@ -7019,7 +7094,7 @@ mm.add("(min-width: 1024px)", () => {
     duration: 1,
     delay: 1.5
   });
-  gsapWithCSS.fromTo(".menu__languages", {
+  gsapWithCSS$1.fromTo(".menu__languages", {
     y: -10,
     opacity: 0
   }, {
@@ -7028,7 +7103,7 @@ mm.add("(min-width: 1024px)", () => {
     duration: 1,
     delay: 1.5
   });
-  gsapWithCSS.fromTo(".menu__languages a", {
+  gsapWithCSS$1.fromTo(".menu__languages a", {
     y: -10,
     opacity: 0
   }, {
@@ -7038,7 +7113,7 @@ mm.add("(min-width: 1024px)", () => {
     delay: 1.5
     // duration: 0.2,
   });
-  gsapWithCSS.fromTo(".presentation__dekstop", {
+  gsapWithCSS$1.fromTo(".presentation__dekstop", {
     opacity: 0
   }, {
     scrollTrigger: {
@@ -7052,7 +7127,7 @@ mm.add("(min-width: 1024px)", () => {
 });
 mm.add("(max-width: 1024px)", () => {
 });
-gsapWithCSS.fromTo(".presentation__container", {
+gsapWithCSS$1.fromTo(".presentation__container", {
   scale: 0,
   opacity: 0
 }, {
@@ -7065,7 +7140,7 @@ gsapWithCSS.fromTo(".presentation__container", {
   delay: 1.2,
   duration: 0.9
 });
-gsapWithCSS.fromTo(".presentation__title", {
+gsapWithCSS$1.fromTo(".presentation__title", {
   y: 50,
   opacity: 0
 }, {
@@ -7078,7 +7153,7 @@ gsapWithCSS.fromTo(".presentation__title", {
   duration: 1,
   delay: 1.8
 });
-gsapWithCSS.fromTo(".cooperation__title", {
+gsapWithCSS$1.fromTo(".cooperation__title", {
   y: 50,
   opacity: 0
 }, {
@@ -7091,8 +7166,8 @@ gsapWithCSS.fromTo(".cooperation__title", {
   duration: 0.6
   // delay: 1, 
 });
-gsapWithCSS.utils.toArray(".cooperation__item").forEach((item, index) => {
-  gsapWithCSS.fromTo(
+gsapWithCSS$1.utils.toArray(".cooperation__item").forEach((item, index) => {
+  gsapWithCSS$1.fromTo(
     item,
     {
       y: 50,
@@ -7111,7 +7186,7 @@ gsapWithCSS.utils.toArray(".cooperation__item").forEach((item, index) => {
     }
   );
 });
-gsapWithCSS.fromTo(".cooperation__all", {
+gsapWithCSS$1.fromTo(".cooperation__all", {
   y: 30,
   opacity: 0
 }, {
@@ -7126,7 +7201,7 @@ gsapWithCSS.fromTo(".cooperation__all", {
 });
 const splitter = new SplitText(".equity__title", { type: "words" });
 const chars = splitter.words;
-gsapWithCSS.from(chars, {
+gsapWithCSS$1.from(chars, {
   scrollTrigger: {
     trigger: ".equity",
     // trigger: chars,    
@@ -7140,7 +7215,7 @@ gsapWithCSS.from(chars, {
   ease: "power1.out",
   stagger: 0.05
 });
-gsapWithCSS.fromTo(".equity__image", {
+gsapWithCSS$1.fromTo(".equity__image", {
   scale: 0,
   opacity: 0
 }, {
@@ -7153,8 +7228,8 @@ gsapWithCSS.fromTo(".equity__image", {
   duration: 1
   // delay: 1, 
 });
-gsapWithCSS.utils.toArray(".statistics__items .statistics__item").forEach((item, index) => {
-  gsapWithCSS.fromTo(
+gsapWithCSS$1.utils.toArray(".statistics__items .statistics__item").forEach((item, index) => {
+  gsapWithCSS$1.fromTo(
     item,
     {
       y: 50,
@@ -7173,8 +7248,8 @@ gsapWithCSS.utils.toArray(".statistics__items .statistics__item").forEach((item,
     }
   );
 });
-gsapWithCSS.utils.toArray(".statistics__info-items .statistics__item").forEach((item, index) => {
-  gsapWithCSS.fromTo(
+gsapWithCSS$1.utils.toArray(".statistics__info-items .statistics__item").forEach((item, index) => {
+  gsapWithCSS$1.fromTo(
     item,
     {
       y: 50,
@@ -7195,7 +7270,7 @@ gsapWithCSS.utils.toArray(".statistics__info-items .statistics__item").forEach((
 });
 const splitterFocus = new SplitText(".focus__title", { type: "words" });
 const charsFocus = splitterFocus.words;
-gsapWithCSS.from(charsFocus, {
+gsapWithCSS$1.from(charsFocus, {
   scrollTrigger: {
     trigger: ".focus",
     start: "top center",
@@ -7207,7 +7282,7 @@ gsapWithCSS.from(charsFocus, {
   ease: "power1.out",
   stagger: 0.05
 });
-gsapWithCSS.fromTo(".focus__image", {
+gsapWithCSS$1.fromTo(".focus__image", {
   scale: 0,
   opacity: 0
 }, {
@@ -7220,7 +7295,7 @@ gsapWithCSS.fromTo(".focus__image", {
   duration: 1
   // delay: 1, 
 });
-gsapWithCSS.fromTo(".approaches__title", {
+gsapWithCSS$1.fromTo(".approaches__title", {
   y: 50,
   opacity: 0
 }, {
@@ -7233,8 +7308,8 @@ gsapWithCSS.fromTo(".approaches__title", {
   duration: 0.5
   // delay: 1, 
 });
-gsapWithCSS.utils.toArray(".approaches__item").forEach((item, index) => {
-  gsapWithCSS.fromTo(
+gsapWithCSS$1.utils.toArray(".approaches__item").forEach((item, index) => {
+  gsapWithCSS$1.fromTo(
     item,
     {
       y: 50,
@@ -7253,7 +7328,7 @@ gsapWithCSS.utils.toArray(".approaches__item").forEach((item, index) => {
     }
   );
 });
-gsapWithCSS.fromTo(".partners__title", {
+gsapWithCSS$1.fromTo(".partners__title", {
   y: 30,
   opacity: 0
 }, {
@@ -7266,7 +7341,7 @@ gsapWithCSS.fromTo(".partners__title", {
   duration: 0.5
   // delay: 1, 
 });
-gsapWithCSS.fromTo(".partners__container", {
+gsapWithCSS$1.fromTo(".partners__container", {
   y: 50,
   opacity: 0
 }, {
@@ -7279,7 +7354,7 @@ gsapWithCSS.fromTo(".partners__container", {
   duration: 0.7
   // delay: 1, 
 });
-gsapWithCSS.fromTo(".contact__title", {
+gsapWithCSS$1.fromTo(".contact__title", {
   y: 50,
   opacity: 0
 }, {
@@ -7292,7 +7367,7 @@ gsapWithCSS.fromTo(".contact__title", {
   duration: 1
   // delay: 1, 
 });
-gsapWithCSS.fromTo(".contact__description", {
+gsapWithCSS$1.fromTo(".contact__description", {
   y: 80,
   opacity: 0
 }, {
@@ -7305,7 +7380,7 @@ gsapWithCSS.fromTo(".contact__description", {
   duration: 1
   // delay: 1, 
 });
-gsapWithCSS.fromTo(".contact__communication", {
+gsapWithCSS$1.fromTo(".contact__communication", {
   y: 80,
   opacity: 0
 }, {
@@ -7319,7 +7394,7 @@ gsapWithCSS.fromTo(".contact__communication", {
   duration: 1.3
   // delay: 1, 
 });
-gsapWithCSS.fromTo(".contact__form > *", {
+gsapWithCSS$1.fromTo(".contact__form > *", {
   y: 50,
   opacity: 0
 }, {
@@ -7333,8 +7408,8 @@ gsapWithCSS.fromTo(".contact__form > *", {
   duration: 1.3
   // delay: 1, 
 });
-gsapWithCSS.utils.toArray(".archive__directions > *").forEach((item, index) => {
-  gsapWithCSS.fromTo(
+gsapWithCSS$1.utils.toArray(".archive__directions > *").forEach((item, index) => {
+  gsapWithCSS$1.fromTo(
     item,
     {
       y: 50,
@@ -7353,27 +7428,7 @@ gsapWithCSS.utils.toArray(".archive__directions > *").forEach((item, index) => {
     }
   );
 });
-gsapWithCSS.utils.toArray(".archive__item").forEach((item, index) => {
-  gsapWithCSS.fromTo(
-    item,
-    {
-      y: 50,
-      opacity: 0
-    },
-    {
-      scrollTrigger: {
-        trigger: item,
-        start: "top-=150px center"
-      },
-      y: 0,
-      opacity: 1,
-      duration: 1,
-      delay: index * 0.2,
-      ease: "power2.out"
-    }
-  );
-});
-gsapWithCSS.fromTo(".info-project__image", {
+gsapWithCSS$1.fromTo(".info-project__image", {
   scale: 0,
   opacity: 0
 }, {
@@ -7386,7 +7441,7 @@ gsapWithCSS.fromTo(".info-project__image", {
   duration: 1
   // delay: 1, 
 });
-gsapWithCSS.fromTo(".info-project__title", {
+gsapWithCSS$1.fromTo(".info-project__title", {
   y: 50,
   opacity: 0
 }, {
@@ -7399,7 +7454,7 @@ gsapWithCSS.fromTo(".info-project__title", {
   duration: 1.3
   // delay: 1, 
 });
-gsapWithCSS.fromTo(".info-project__period > *", {
+gsapWithCSS$1.fromTo(".info-project__period > *", {
   y: 50,
   opacity: 0
 }, {
@@ -7413,7 +7468,7 @@ gsapWithCSS.fromTo(".info-project__period > *", {
   duration: 0.8
   // delay: 1, 
 });
-gsapWithCSS.fromTo(".info-project__about > *", {
+gsapWithCSS$1.fromTo(".info-project__about > *", {
   y: 50,
   opacity: 0
 }, {
@@ -7427,7 +7482,7 @@ gsapWithCSS.fromTo(".info-project__about > *", {
   duration: 0.8
   // delay: 1, 
 });
-gsapWithCSS.fromTo(".info-project__partners > *", {
+gsapWithCSS$1.fromTo(".info-project__partners > *", {
   y: 50,
   opacity: 0
 }, {
@@ -7441,7 +7496,7 @@ gsapWithCSS.fromTo(".info-project__partners > *", {
   duration: 0.8
   // delay: 1, 
 });
-gsapWithCSS.fromTo(".results__title", {
+gsapWithCSS$1.fromTo(".results__title", {
   y: 50,
   opacity: 0
 }, {
@@ -7454,8 +7509,8 @@ gsapWithCSS.fromTo(".results__title", {
   duration: 1
   // delay: 1, 
 });
-gsapWithCSS.utils.toArray(".results__item").forEach((item, index) => {
-  gsapWithCSS.fromTo(
+gsapWithCSS$1.utils.toArray(".results__item").forEach((item, index) => {
+  gsapWithCSS$1.fromTo(
     item,
     {
       y: 50,
@@ -7474,8 +7529,8 @@ gsapWithCSS.utils.toArray(".results__item").forEach((item, index) => {
     }
   );
 });
-gsapWithCSS.utils.toArray(".info-block__text > *").forEach((item, index) => {
-  gsapWithCSS.fromTo(
+gsapWithCSS$1.utils.toArray(".info-block__text > *").forEach((item, index) => {
+  gsapWithCSS$1.fromTo(
     item,
     {
       y: 50,
@@ -7494,8 +7549,8 @@ gsapWithCSS.utils.toArray(".info-block__text > *").forEach((item, index) => {
     }
   );
 });
-gsapWithCSS.utils.toArray(".info-block__image").forEach((item, index) => {
-  gsapWithCSS.fromTo(
+gsapWithCSS$1.utils.toArray(".info-block__image").forEach((item, index) => {
+  gsapWithCSS$1.fromTo(
     item,
     {
       y: 25,
@@ -7514,7 +7569,7 @@ gsapWithCSS.utils.toArray(".info-block__image").forEach((item, index) => {
     }
   );
 });
-gsapWithCSS.fromTo(".about-us__title", {
+gsapWithCSS$1.fromTo(".about-us__title", {
   y: 50,
   opacity: 0
 }, {
@@ -7527,8 +7582,8 @@ gsapWithCSS.fromTo(".about-us__title", {
   duration: 1
   // delay: 1, 
 });
-gsapWithCSS.utils.toArray(".about-us__article").forEach((item, index) => {
-  gsapWithCSS.fromTo(
+gsapWithCSS$1.utils.toArray(".about-us__article").forEach((item, index) => {
+  gsapWithCSS$1.fromTo(
     item,
     {
       y: 25,
@@ -12259,3 +12314,126 @@ function initSliders() {
   }
 }
 document.querySelector("[data-fls-slider]") ? window.addEventListener("load", initSliders) : null;
+var gsapWithCSS = gsap$3.registerPlugin(CSSPlugin) || gsap$3;
+gsapWithCSS.core.Tween;
+function tabs() {
+  const tabs2 = document.querySelectorAll("[data-fls-tabs]");
+  let tabsActiveHash = [];
+  if (tabs2.length > 0) {
+    const hash = getHash();
+    if (hash && hash.startsWith("tab-")) {
+      tabsActiveHash = hash.replace("tab-", "").split("-");
+    }
+    tabs2.forEach((tabsBlock, index) => {
+      tabsBlock.classList.add("--tab-init");
+      tabsBlock.setAttribute("data-fls-tabs-index", index);
+      tabsBlock.addEventListener("click", setTabsAction);
+      initTabs(tabsBlock);
+    });
+  }
+  function initTabs(tabsBlock) {
+    const tabsTitles = tabsBlock.querySelectorAll("[data-fls-tabs-titles]>*");
+    const tabsContent = tabsBlock.querySelectorAll("[data-fls-tabs-body]>*");
+    const tabsBlockIndex = tabsBlock.dataset.flsTabsIndex;
+    const tabsActiveHashBlock = tabsActiveHash[0] == tabsBlockIndex;
+    if (tabsActiveHashBlock) {
+      const tabsActiveTitle = tabsBlock.querySelector("[data-fls-tabs-titles]>.active");
+      tabsActiveTitle ? tabsActiveTitle.classList.remove("active") : null;
+    }
+    if (tabsContent.length) {
+      tabsContent.forEach((tabsContentItem, index) => {
+        tabsTitles[index].setAttribute("data-fls-tabs-title", "");
+        tabsContentItem.setAttribute("data-fls-tabs-item", "");
+        if (tabsActiveHashBlock && index == tabsActiveHash[1]) {
+          tabsTitles[index].classList.add("active");
+        }
+        tabsContentItem.hidden = !tabsTitles[index].classList.contains("active");
+      });
+      const activeIndex = tabsActiveHashBlock ? tabsActiveHash[1] : null;
+      if (activeIndex !== null) {
+        const activeContentItem = tabsContent[activeIndex];
+        animateTabItems(activeContentItem);
+      }
+    }
+  }
+  function setTabsStatus(tabsBlock) {
+    let tabsTitles = tabsBlock.querySelectorAll("[data-fls-tabs-title]");
+    let tabsContent = tabsBlock.querySelectorAll("[data-fls-tabs-item]");
+    const tabsBlockIndex = tabsBlock.dataset.flsTabsIndex;
+    function isTabsAnimate(tabsBlock2) {
+      if (tabsBlock2.hasAttribute("data-fls-tabs-animate")) {
+        return tabsBlock2.dataset.flsTabsAnimate > 0 ? Number(tabsBlock2.dataset.flsTabsAnimate) : 500;
+      }
+    }
+    const tabsBlockAnimate = isTabsAnimate(tabsBlock);
+    if (tabsContent.length > 0) {
+      const isHash = tabsBlock.hasAttribute("data-fls-tabs-hash");
+      tabsContent = Array.from(tabsContent).filter((item) => item.closest("[data-fls-tabs]") === tabsBlock);
+      tabsTitles = Array.from(tabsTitles).filter((item) => item.closest("[data-fls-tabs]") === tabsBlock);
+      tabsContent.forEach((tabsContentItem, index) => {
+        if (tabsTitles[index].classList.contains("active")) {
+          if (tabsBlockAnimate) {
+            slideDown(tabsContentItem, tabsBlockAnimate);
+          } else {
+            tabsContentItem.hidden = false;
+          }
+          if (isHash && !tabsContentItem.closest(".popup")) {
+            setHash(`tab-${tabsBlockIndex}-${index}`);
+          }
+          animateTabItems(tabsContentItem);
+        } else {
+          if (tabsBlockAnimate) {
+            slideUp(tabsContentItem, tabsBlockAnimate);
+          } else {
+            tabsContentItem.hidden = true;
+          }
+          resetTabItems(tabsContentItem);
+        }
+      });
+    }
+  }
+  function setTabsAction(e) {
+    const el = e.target;
+    if (el.closest("[data-fls-tabs-title]")) {
+      const tabTitle = el.closest("[data-fls-tabs-title]");
+      const tabsBlock = tabTitle.closest("[data-fls-tabs]");
+      if (!tabTitle.classList.contains("active") && !tabsBlock.querySelector(".--slide")) {
+        let tabActiveTitle = tabsBlock.querySelectorAll("[data-fls-tabs-title].active");
+        tabActiveTitle.length ? tabActiveTitle = Array.from(tabActiveTitle).filter((item) => item.closest("[data-fls-tabs]") === tabsBlock) : null;
+        tabActiveTitle.length ? tabActiveTitle[0].classList.remove("active") : null;
+        tabTitle.classList.add("active");
+        setTabsStatus(tabsBlock);
+      }
+      e.preventDefault();
+    }
+  }
+  function animateTabItems(tabsContentItem) {
+    if (tabsContentItem.hidden) return;
+    const items = tabsContentItem.querySelectorAll(".archive__item");
+    if (!items || items.length === 0) return;
+    items.forEach((item, index) => {
+      gsapWithCSS.fromTo(
+        item,
+        { y: 50, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          delay: index * 0.15,
+          // чем дальше элемент, тем больше задержка
+          ease: "power2.out"
+        }
+      );
+    });
+  }
+  function resetTabItems(tabsContentItem) {
+    const items = tabsContentItem.querySelectorAll(".archive__item");
+    if (!items || items.length === 0) return;
+    items.forEach((item) => {
+      gsapWithCSS.set(item, { clearProps: "all" });
+      item.style.opacity = 0;
+      item.style.transform = "translateY(50px)";
+    });
+  }
+}
+window.addEventListener("load", tabs);
